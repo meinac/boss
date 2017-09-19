@@ -12,7 +12,7 @@ class Release
   end
 
   def name
-    @name ||= "#{application.name} release (#{version} - #{created_at.strftime(RELEASE_NAME_PATTERN)})"
+    @name ||= "#{application.name} (#{version} - #{created_at.strftime(RELEASE_NAME_PATTERN)})"
   end
 
   def serialization_name
