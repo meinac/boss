@@ -6,7 +6,9 @@ gem 'thin'
 gem 'activesupport'
 gem 'sentry-raven'
 gem 'pry'
+gem 'easy_conf'
 
 group :development do
   gem 'mina'
+  gem 'pry'
 end

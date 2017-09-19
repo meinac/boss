@@ -9,6 +9,7 @@ GEM
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
     daemons (1.2.4)
+    easy_conf (0.2.0)
     eventmachine (1.2.5)
     faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
@@ -53,6 +54,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
+  easy_conf
   mina
   pry
   sentry-raven

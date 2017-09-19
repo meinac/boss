@@ -1,0 +1,10 @@
+applications:
+  modostyle:
+    period: 3600
+    stakeholders:
+      - john.doe@foo.bar
+    postpone_for: 3600
+    deploy_after: 25200
+    deploy_before: 61200
+    repository: git@github.com:rails/rails.git
+    branch: master

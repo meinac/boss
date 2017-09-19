@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(File.join(__dir__, '../boot.rb'))
+
+job = (ARGV.shift || "start").to_sym
+
+if CLI.methods(false).include?(job)
+  CLI.send(job)
+else
+  puts "'#{job}' is not recognized"
+  exit 1
+end
