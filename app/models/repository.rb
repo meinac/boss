@@ -1,11 +1,10 @@
 class Repository
-  attr_reader :application, :remote_url, :branch, :releases
+  attr_reader :application, :remote_url, :branch
 
   def initialize(application, remote_url, branch)
     @application = application
     @remote_url  = remote_url
     @branch      = branch
-    @releases    = []
 
     init_file_system!
   end
@@ -18,12 +17,6 @@ class Repository
     return if repository_initalized?
 
     FS.run_in_dir(path) { Git.clone(remote_url) }
-  end
-
-  def create_release_candidate
-    release = Release.new(self)
-    release.populate_changes
-    releases << release
   end
 
   # Returns git log between two branches;

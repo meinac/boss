@@ -19,6 +19,10 @@ class FS
 
       Dir.mkdir(path)
     end
+
+    def open_file(file_name, options = nil, mode = 0644, &block)
+      File.open(file_name, options, mode) { |f| block.call(f) }
+    end
   end
 
 end

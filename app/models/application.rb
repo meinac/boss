@@ -1,5 +1,5 @@
 class Application
-  attr_reader :name, :period, :stakeholders, :postpone_for, :deploy_after, :deploy_before, :changes, :repository
+  attr_reader :name, :period, :stakeholders, :postpone_for, :deploy_after, :deploy_before, :changes, :repository, :releases
 
   def initialize(app_name, configs)
     @name          = app_name
@@ -9,6 +9,7 @@ class Application
     @deploy_after  = configs['deploy_after']
     @deploy_before = configs['deploy_before']
     @repository    = Repository.new(self, configs['repository'], configs['branch'])
+    @releases      = []
 
     init_file_system!
   end
@@ -23,7 +24,13 @@ class Application
   end
 
   def create_release_candidate
-    repository.create_release_candidate
+    release = Release.new(self, next_release_version)
+    release.note.save
+    releases << release
+  end
+
+  def next_release_version
+    releases.last&.version.to_i + 1
   end
 
 end

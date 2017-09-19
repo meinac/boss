@@ -18,9 +18,12 @@ GEM
     mina (1.0.6)
       open4 (~> 1.3.4)
       rake
+    mini_portile2 (2.2.0)
     minitest (5.10.3)
     multi_json (1.12.2)
     multipart-post (2.0.0)
+    nokogiri (1.8.0)
+      mini_portile2 (~> 2.2.0)
     open4 (1.3.4)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -56,6 +59,7 @@ DEPENDENCIES
   activesupport
   easy_conf
   mina
+  nokogiri (~> 1.8)
   pry
   sentry-raven
   sinatra

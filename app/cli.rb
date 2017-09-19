@@ -6,7 +6,7 @@ class CLI
     def start
       check_pid_file!
 
-#      Process.daemon(true, false)
+      Process.daemon(true, false)
       set_pid_file
 
       at_exit do
