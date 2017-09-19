@@ -1,5 +1,6 @@
 class Commit
   COMMIT_REGEX = /commit\s(.+)$\n^author:\s(.+)$\n^date:\s(.+)$\n((?:\s\n*.+\n*)+)\s?(?=commit)?/i
+  DATE_PATTERN = '%Y-%m-%d %H:%M'
 
   attr_reader :hash, :author, :date, :message
 
@@ -11,7 +12,7 @@ class Commit
   end
 
   def pretty_date
-    @pretty_date ||= DateTime.parse(date)
+    @pretty_date ||= DateTime.parse(date).strftime(DATE_PATTERN)
   end
 
   def self.list_from_git_log(git_log)
