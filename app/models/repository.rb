@@ -14,6 +14,8 @@ class Repository
   end
 
   def init_file_system!
+    application.init_file_system!
+
     return if repository_initalized?
 
     FS.run_in_dir(path) { Git.clone(remote_url) }

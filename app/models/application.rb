@@ -8,8 +8,8 @@ class Application
     @postpone_for  = configs['postpone_for']
     @deploy_after  = configs['deploy_after']
     @deploy_before = configs['deploy_before']
-    @repository    = Repository.new(self, configs['repository'], configs['branch'])
     @releases      = []
+    @repository    = Repository.new(self, configs['repository'], configs['branch'])
 
     init_file_system!
   end
@@ -20,7 +20,6 @@ class Application
 
   def init_file_system!
     FS.mkdir(path)
-    repository.init_file_system!
   end
 
   def create_release_candidate
