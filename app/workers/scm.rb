@@ -13,6 +13,8 @@ class SCM
   end
 
   def run
+    Util.put_log("SCM running for #{application.name}")
+
     while(true) do
       application.init_file_system!
       application.create_release_candidate

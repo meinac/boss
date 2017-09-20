@@ -4,9 +4,10 @@ class CLI
 
   class << self
     def start
-      check_pid_file!
+      puts 'Running Boss'
 
-      Process.daemon(true, false)
+      check_pid_file!
+      Process.daemon(true, false) if $app_config.daemon
       set_pid_file
 
       at_exit do
@@ -14,6 +15,11 @@ class CLI
       end
 
       start_workers
+    rescue => error
+      backtrace = error.backtrace.join("\n")
+      message   = "#{error.inspect}\n#{backtrace}"
+
+      Util.put_log(message, :error)
     end
 
     def stop
