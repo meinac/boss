@@ -1,5 +1,6 @@
 class Note
-  LIST_STYLE = 'margin-bottom: 10px; border-bottom: 1px dotted; padding: 10px;'
+  DEFAULT_LIST_STYLE = 'margin-bottom: 10px; border-bottom: 1px dotted; padding: 10px;'
+  HOTFIX_LIST_STYLE  = 'margin-bottom: 10px; border-bottom: 1px dotted; padding: 10px; color: #FF0000;'
   DIV_STYLE  = 'margin-bottom: 5px;'
 
   attr_reader :release
@@ -57,12 +58,16 @@ class Note
       ul = create_element_into(body, 'ul')
 
       release.commits.each do |commit|
-        li = create_element_into(ul, 'li', { style: LIST_STYLE  })
+        li = create_element_into(ul, 'li', { style: list_style(commit) })
 
         create_element_into(li, 'div', commit.author, { style: DIV_STYLE })
         create_element_into(li, 'div', commit.pretty_date, { style: DIV_STYLE })
         create_element_into(li, 'div', commit.message)
       end
+    end
+
+    def list_style(commit)
+      commit.is_hotfix? ? HOTFIX_LIST_STYLE : DEFAULT_LIST_STYLE
     end
 
 end
