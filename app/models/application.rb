@@ -24,6 +24,8 @@ class Application
 
   def create_release_candidate
     release = Release.new(self, next_release_version)
+    return if release.is_empty?
+
     release.note.save
     releases << release
   end

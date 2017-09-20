@@ -35,6 +35,10 @@ class Release
     FS.mkdir(path)
   end
 
+  def is_empty?
+    commits.blank?
+  end
+
   private
     def git_changes
       application.repository.changes_on(serialization_name)
