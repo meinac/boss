@@ -1,4 +1,7 @@
 class Note
+  LIST_STYLE = 'margin-bottom: 10px; border-bottom: 1px dotted; padding: 10px;'
+  DIV_STYLE  = 'margin-bottom: 5px;'
+
   attr_reader :release
 
   def initialize(release)
@@ -54,10 +57,10 @@ class Note
       ul = create_element_into(body, 'ul')
 
       release.commits.each do |commit|
-        li = create_element_into(ul, 'li')
+        li = create_element_into(ul, 'li', { style: LIST_STYLE  })
 
-        create_element_into(li, 'div', commit.author)
-        create_element_into(li, 'div', commit.pretty_date)
+        create_element_into(li, 'div', commit.author, { style: DIV_STYLE })
+        create_element_into(li, 'div', commit.pretty_date, { style: DIV_STYLE })
         create_element_into(li, 'div', commit.message)
       end
     end
