@@ -1,3 +1,5 @@
+logfile: log/boss.log
+daemon: true
 applications:
   modostyle:
     period: 3600
