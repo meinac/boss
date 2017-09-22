@@ -1,4 +1,4 @@
-class Release
+class Release < AbstractModel
   RELEASE_SERIALIZATION_PATTERN = '%Y_%m_%d_%H_%M_%S'
   RELEASE_NAME_PATTERN          = '%Y/%m/%d %H:%M'
 

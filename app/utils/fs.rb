@@ -20,8 +20,24 @@ class FS
       Dir.mkdir(path)
     end
 
+    def list(path)
+      Dir.entries(path)
+    end
+
     def open_file(file_name, options = nil, mode = 0644, &block)
       File.open(file_name, options, mode) { |f| block.call(f) }
+    end
+
+    def read_file(file_name)
+      File.read(file_name)
+    end
+
+    def exist?(file_name)
+      File.exist?(file_name)
+    end
+
+    def create(file_name, mode = 0644)
+      File.new(file_name, File::CREAT, mode)
     end
   end
 

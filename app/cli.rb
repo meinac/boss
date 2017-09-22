@@ -11,7 +11,7 @@ class CLI
       set_pid_file
 
       at_exit do
-        remove_pid_file
+        prepare_to_exit
       end
 
       start_workers
@@ -49,13 +49,21 @@ class CLI
       stop && start
     end
 
-
     private
       def check_pid_file!
         if File.exist?(PID_FILE)
           puts "It seems like boss is already running!\nPlease check the pid file!"
           exit 1
         end
+      end
+
+      def prepare_to_exit
+        save_model_states
+        remove_pid_file
+      end
+
+      def save_model_states
+        ApplicationFactory.persist_applications
       end
 
       def remove_pid_file

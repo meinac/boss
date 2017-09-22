@@ -1,4 +1,4 @@
-class Commit
+class Commit < AbstractModel
   COMMIT_REGEX = /commit\s(.+)$\n^author:\s(.+)$\n^date:\s(.+)$\n((?:\s\n*.+\n*)+)\s?(?=commit)?/i
   DATE_PATTERN = '%Y-%m-%d %H:%M'
   HOTFIX_REGEX = /<<hotfix>>/i
