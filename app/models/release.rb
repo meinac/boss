@@ -20,11 +20,15 @@ class Release < AbstractModel
   end
 
   def commits
-    @commits ||= Commit.list_from_git_log(git_changes)
+    @commits ||= CommitFactory.create_list(self)
+  end
+
+  def authors
+    commits.map(&:author)
   end
 
   def note
-    @release ||= Note.new(self)
+    @note ||= Note.new(self)
   end
 
   def path
@@ -39,9 +43,8 @@ class Release < AbstractModel
     commits.blank?
   end
 
-  private
-    def git_changes
-      application.repository.changes_on(serialization_name)
-    end
+  def git_changes
+    application.repository.changes_on(serialization_name)
+  end
 
 end

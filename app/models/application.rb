@@ -1,10 +1,10 @@
 class Application < AbstractModel
-  attr_reader :name, :configuration, :repository, :releases
+  attr_reader :name
+  attr_accessor :configuration, :repository
 
-  def initialize(app_name, configs)
+  def initialize(app_name)
     @name = app_name
 
-    create_children(configs)
     init_file_system!
   end
 
@@ -19,22 +19,16 @@ class Application < AbstractModel
   end
 
   def create_release_candidate
-    release = Release.new(self, next_release_version)
-    return if release.is_empty?
-
-    release.note.save
-    releases << release
+    release = ReleaseFactory.create(self, next_release_version)
+    releases << release if release
   end
 
   def next_release_version
     releases.last&.version.to_i + 1
   end
 
-  private
-    def create_children(configs)
-      @configuration = Configuration.new(self, configs)
-      @releases      = []
-      @repository    = Repository.new(self, configs['repository'], configs['branch'])
-    end
+  def releases
+    @releases ||= []
+  end
 
 end

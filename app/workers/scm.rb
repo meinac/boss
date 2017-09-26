@@ -18,7 +18,7 @@ class SCM
     while(true) do
       application.init_file_system!
       application.create_release_candidate
-      sleep(application.period)
+      sleep(application.configuration.period)
     end
   end
 
