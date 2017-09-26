@@ -1,4 +1,4 @@
-class Note
+class Note < AbstractModel
   DEFAULT_LIST_STYLE = 'margin-bottom: 10px; border-bottom: 1px dotted; padding: 10px;'
   HOTFIX_LIST_STYLE  = 'margin-bottom: 10px; border-bottom: 1px dotted; padding: 10px; color: #FF0000;'
   DIV_STYLE  = 'margin-bottom: 5px;'
@@ -28,6 +28,16 @@ class Note
 
     FS.open_file(path, 'w+') do |f|
       f << to_html
+    end
+  end
+
+  def marshal_dump
+    { :@relase => release }
+  end
+
+  def marshal_load(vars)
+    vars.each do |attr, value|
+      instance_variable_set(attr, value)
     end
   end
 

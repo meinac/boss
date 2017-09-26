@@ -1,18 +1,14 @@
-class Application
-  attr_reader :name, :period, :stakeholders, :postpone_for, :deploy_after, :deploy_before, :changes, :repository, :releases
+class Application < AbstractModel
+  attr_reader :name, :configuration, :repository, :releases
 
   def initialize(app_name, configs)
-    @name          = app_name
-    @period        = configs['period']
-    @stakeholders  = configs['stakeholders']
-    @postpone_for  = configs['postpone_for']
-    @deploy_after  = configs['deploy_after']
-    @deploy_before = configs['deploy_before']
-    @releases      = []
-    @repository    = Repository.new(self, configs['repository'], configs['branch'])
+    @name = app_name
 
+    create_children(configs)
     init_file_system!
   end
+
+  alias_method :id, :name
 
   def path
     "tmp/#{name}"
@@ -33,5 +29,12 @@ class Application
   def next_release_version
     releases.last&.version.to_i + 1
   end
+
+  private
+    def create_children(configs)
+      @configuration = Configuration.new(self, configs)
+      @releases      = []
+      @repository    = Repository.new(self, configs['repository'], configs['branch'])
+    end
 
 end

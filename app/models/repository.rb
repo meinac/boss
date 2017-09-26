@@ -1,4 +1,4 @@
-class Repository
+class Repository < AbstractModel
   attr_reader :application, :remote_url, :branch
 
   def initialize(application, remote_url, branch)
