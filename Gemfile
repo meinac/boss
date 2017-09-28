@@ -11,5 +11,9 @@ gem 'nokogiri', '~> 1.8'
 
 group :development do
   gem 'mina'
+end
+
+group :development, :test do
   gem 'pry'
+  gem 'rspec'
 end

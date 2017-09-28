@@ -10,20 +10,25 @@ class ApplicationFactory
     end
 
     private
-      # This is not good
       def create_applications
-        applications_persisted = Application.all
-
         $app_config.applications.map do |app_name, configs|
-          application = applications_persisted.select { |app| app_name == app.name }.first
-
-          if application
-            application.instance_variable_set(:@configuration, Configuration.new(application, configs))
-            application
-          else
-            Application.new(app_name, configs)
+          (persisted_application(app_name) || Application.new(app_name)).tap do |application|
+            application.configuration = create_configuration(configs)
+            application.repository    = create_repository(application, configs)
           end
         end
+      end
+
+      def create_configuration(configs)
+        Configuration.new(configs)
+      end
+
+      def create_repository(application, configs)
+        Repository.new(application, configs['repository'], configs['branch'])
+      end
+
+      def persisted_application(app_name)
+        Application.all.select { |app| app_name == app.name }.first
       end
 
   end
