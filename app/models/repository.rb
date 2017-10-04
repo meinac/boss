@@ -38,7 +38,7 @@ class Repository < AbstractModel
       FS.mkdir(path)
 
       FS.run_in_dir(path) do
-        remote_url == Git.get_url
+        remote_url == Git.get_url.chomp
       end
     end
 

@@ -15,9 +15,18 @@ class Author
           (!whitelisted_list || whitelisted_list.include?(email)))
   end
 
+  # This method is used by Array#uniq
+  # method of Ruby core.
+  def hash
+    "Author::#{email}".hash
+  end
+
   def ==(other)
     other.respond_to?(:email) && email == other.email
   end
+
+  alias_method :eql?, :==
+  alias_method :eq?, :==
 
   private
     def whitelisted_regex

@@ -4,3 +4,11 @@ commit:
   git_author: John Doe
   date: '29.10.1923'
   message: WhAt A mEaNiNgFuL mEsSaGe
+  author@: author
+hotfix:
+  release@: release
+  hash: foo
+  git_author: John Doe
+  date: '29.10.1923'
+  message: <<hotfix>> WhAt An ImPoRtAnT CoMmIt
+  author@: author

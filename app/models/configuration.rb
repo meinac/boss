@@ -6,7 +6,8 @@ class Configuration < AbstractModel
     :whitelisted_authors_regex,
     :postpone_for,
     :deploy_after,
-    :deploy_before
+    :deploy_before,
+    :deployment_task,
   ]
 
   attr_reader *ATTRIBUTES

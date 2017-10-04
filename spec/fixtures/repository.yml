@@ -1,0 +1,4 @@
+repository:
+  application@: application
+  remote_url: foo
+  branch: master
