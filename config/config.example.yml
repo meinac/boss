@@ -9,6 +9,7 @@ applications:
       - john.doe@foo.bar
     whitelisted_authors_regex:
       .+@foo.bar
+    deployment_task: deploy.example
     postpone_for: 3600
     deploy_after: 25200
     deploy_before: 61200

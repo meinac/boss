@@ -1,7 +1,10 @@
 .DS_STORE
 /log/*
 /tmp/*
+/tasks/*
 /config/config.yml
 
 !log/.keep
 !tmp/.keep
+!tasks/.keep
+!tasks/deploy.example

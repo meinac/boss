@@ -24,7 +24,7 @@ class Release < AbstractModel
   end
 
   def authors
-    commits.map(&:author)
+    commits.map(&:author).uniq
   end
 
   def note
@@ -45,6 +45,10 @@ class Release < AbstractModel
 
   def git_changes
     application.repository.changes_on(serialization_name)
+  end
+
+  def has_hotfix?
+    commits.any? { |c| c.is_hotfix? }
   end
 
 end
