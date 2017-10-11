@@ -8,6 +8,7 @@ gem 'sentry-raven'
 gem 'pry'
 gem 'easy_conf'
 gem 'nokogiri', '~> 1.8'
+gem 'mail'
 
 group :development do
   gem 'mina'
