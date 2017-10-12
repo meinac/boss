@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+  - 2.4.0
+  - 2.3.0
+bundler_args: --jobs=2
+script:
+  - cp config/config.example.yml config/config.yml
+  - rspec
