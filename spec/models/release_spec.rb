@@ -9,15 +9,19 @@ describe Release do
   let(:hotfix_release)  { fixture :release, commits: [hotfix_commit, regular_commit] }
   let(:empty_release)   { fixture :release, commits: [] }
 
+  around do |example|
+    with_time_zone('UTC') { example.run }
+  end
+
   describe '#name' do
     it 'returns human friendly name of the release' do
-      expect(regular_release.name).to eql('Foo (1 - 2017/10/04 12:34)')
+      expect(regular_release.name).to eql('Foo (1 - 2017/10/04 10:34)')
     end
   end
 
   describe '#serialization_name' do
     it 'returns release name for internal usage' do
-      expect(regular_release.serialization_name).to eql('2017_10_04_12_34_48')
+      expect(regular_release.serialization_name).to eql('2017_10_04_10_34_48')
     end
   end
 

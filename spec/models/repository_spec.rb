@@ -2,8 +2,24 @@ require 'spec_helper'
 
 describe Repository do
 
-  let(:remote_url) { File.expand_path('spec/fixtures/dummy_git_repo') }
-  let(:repository) { fixture :repository, remote_url: remote_url }
+  let(:repo_path)  { File.expand_path('tmp/dummy_git_repo') }
+  let(:repository) { fixture :repository, remote_url: repo_path }
+
+  # Steps are crucial to properly do integration test.
+  # I just don't want to mock Git module.
+  before do
+    repository.application.init_file_system!
+    repository.init_file_system!
+    FS.mkdir(repo_path)
+    FS.run_in_dir(repo_path) do
+      Git.init('.')
+      Git.commit('First commit')
+    end
+  end
+
+  after do
+    FS.run_in_dir(repository.path) { `rm -rf #{repo_path}` }
+  end
 
   describe '#path' do
     it 'returns the scm path on file system' do
@@ -29,11 +45,11 @@ describe Repository do
     before do
       FS.run_in_dir(repository.path) { `rm -rf .git .keep` }
       repository.init_file_system!
-      FS.run_in_dir(remote_url) { Git.commit('Test commit') }
+      FS.run_in_dir(repo_path) { Git.commit('Test commit') }
     end
 
     after do
-      FS.run_in_dir(remote_url) { Git.reset(1) }
+      FS.run_in_dir(repo_path) { Git.reset(1) }
       FS.run_in_dir(repository.path) { `touch .keep` }
     end
 

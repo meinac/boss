@@ -36,6 +36,10 @@ class Git
     def reset(step)
       `git reset --hard HEAD~#{step}`
     end
+
+    def init(path)
+      `git init #{path}`
+    end
   end
 
 end
