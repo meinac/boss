@@ -1,9 +1,11 @@
 class SCM
 
   def self.start
-    ApplicationFactory.applications.each do |application|
-      new(application).run
+    worker_threads = ApplicationFactory.applications.map do |application|
+      Thread.new { new(application).run }
     end
+
+    worker_threads.map(&:join)
   end
 
   attr_reader :application
