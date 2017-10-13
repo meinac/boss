@@ -4,9 +4,9 @@ class Release < AbstractModel
 
   attr_reader :application, :version, :deployed, :created_at
 
-  def initialize(application, version)
+  def initialize(application)
     @application = application
-    @version     = version
+    @version     = application.next_release_version
     @deployed    = false
     @created_at  = Time.now
   end

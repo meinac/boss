@@ -19,7 +19,7 @@ class Application < AbstractModel
   end
 
   def create_release_candidate
-    release = ReleaseFactory.create(self, next_release_version)
+    release = ReleaseFactory.create(self)
     releases << release if release
   end
 
